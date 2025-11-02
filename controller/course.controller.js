@@ -32,7 +32,7 @@ module.exports.createCourses=async(req,res)=>
 {
     const {title, duration, instructor}=req.body;
 
-    const course=course.Create({title, duration, instructor});
+    const course=await course.createCourses({title, duration, instructor});
 
     res.status(200).json(
         {
@@ -42,12 +42,25 @@ module.exports.createCourses=async(req,res)=>
     );
 }
 
-/* module.exports.updateStudent=async(req,res)=>
+module.exports.updateCourse=async(req,res)=>
 {
-    const {name,age,courseID}=req.body;
+    const {title,duration,instructor}=req.body;
+     const data={};
+
+     if(title) data.title=title;
+     if(duration) data.duration=duration;
+     if(instructor) data.instructor;
+
+     const course= await course.findByIdAndUpdate();
 
 
-} */
+     res.status(200).json({
+        success:true,
+        data:course
+     })
+
+
+}
 
 module.exports.deleteCourse= async (req,res)=>
 {
